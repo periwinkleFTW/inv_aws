@@ -16,43 +16,10 @@ HTML/CSS/JS assets were purchased because the point of this project was to focus
      :target: https://github.com/ambv/black
      :alt: Black code style
 
-Usage (requires Docker and docker-compose)
+Usage
 --------------
+Usage is not provided due to the fact that even in local development sensitive API keys were used
 
-Clone project:
-::
-
-$ git clone https://github.com/periwinkleFTW/inv_aws
-
-Navigate to the project directory:
-::
-
-$ cd inv_aws/
-
-Build docker image using docker-compose for local development:
-::
-
-$ docker-compose -f local.yml build
-
-Start the image you just built (add -d for detached mode):
-::
-
-$ docker-compose -f local.yml up
-
-Make migrations:
-::
-
-$ docker-compose -f local.yml python manage.py makemigrations
-
-Apply migrations:
-::
-
-$ docker-compose -f local.yml python manage.py migrate
-
-Create superuser:
-::
-
-$ docker-compose -f local.yml python manage.py createsuper
 
 
 
