@@ -4,10 +4,8 @@ __pycache__/
 *.py[cod]
 *$py.class
 
-.envs/
+
 .idea/
-.ipython/
-.github/
 
 # C extensions
 *.so
