@@ -18,7 +18,27 @@ HTML/CSS/JS assets were purchased because the point of this project was to focus
 
 Usage
 --------------
-Usage is not provided due to the fact that even in local development sensitive API keys were used
+Clone the project:
+::
+
+$ git clone https://github.com/periwinkleFTW/inv_aws
+
+Navigate to project's directory:
+::
+
+$ cd inv_aws/
+
+Build docker image:
+::
+
+$ docker-compose -f local.yml build
+
+
+Start containers (add -d for detached mode):
+::
+
+$ docker-compose -f local.yml up
+
 
 
 
