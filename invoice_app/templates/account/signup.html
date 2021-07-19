@@ -1,0 +1,70 @@
+{% extends "layouts/base-fullscreen.html" %}
+
+{% load i18n %}
+{% load crispy_forms_tags %}
+
+{% block head_title %}{% trans "Signup" %}{% endblock %}
+
+{% block content %}
+
+  <div class="auth-wrapper">
+    <div class="auth-content">
+      <div class="auth-bg">
+        <span class="r"></span>
+        <span class="r s"></span>
+        <span class="r s"></span>
+        <span class="r"></span>
+      </div>
+      <div class="card">
+        <div class="card-body text-center">
+          <div class="mb-4">
+            <i class="feather icon-user-plus auth-icon"></i>
+          </div>
+          <h3 class="mb-4">Sign up</h3>
+          <p>{% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">login</a>.{% endblocktrans %}</p>
+
+          <span class="mb-0 text-muted">
+                        {% if msg %}
+                          {{ msg | safe }}
+                        {% else %}
+                          Add your credentials
+                        {% endif %}
+                    </span>
+
+          <br />
+          <br />
+
+
+          <form role="form" class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
+            {% csrf_token %}
+            {{ form|crispy }}
+            {% if redirect_field_value %}
+              <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+            {% endif %}
+
+{#          TODO Add JS to uncheck checkbox#}
+            <div class="form-group text-left">
+              <div class="checkbox checkbox-fill d-inline">
+                <input type="checkbox" name="checkbox-fill-1" id="checkbox-fill-a1" checked='' onchange="document.getElementById('register-btn').disabled = !this.checked;">
+                <label for="checkbox-fill-a1" class="cr"> Agree with <a href="#">Terms and Conditions</a></label>
+              </div>
+            </div>
+
+            <button class="btn btn-primary shadow-2 mb-4" type="submit" id="register-btn" >{% trans "Sign Up" %}</button>
+          </form>
+
+          <br />
+          <br />
+
+          <p class="mb-2 text-muted">
+            &copy; MyProject
+            - <a target="_blank" href="#">My Site</a>.
+          </p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}
+

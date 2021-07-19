@@ -1,0 +1,55 @@
+{% extends "layouts/base-fullscreen.html" %}
+
+{% load i18n %}
+
+{% block head_title %}{% trans "Verify Your E-mail Address" %}{% endblock %}
+
+{% block content %}
+  {#    <h1>{% trans "Verify Your E-mail Address" %}</h1>#}
+
+  <div class="auth-wrapper">
+    <div class="auth-content">
+      <div class="auth-bg">
+        <span class="r"></span>
+        <span class="r s"></span>
+        <span class="r s"></span>
+        <span class="r"></span>
+      </div>
+      <div class="card">
+        <div class="card-body text-center">
+          <div class="mb-4">
+            <i class="feather icon-user-plus auth-icon"></i>
+          </div>
+          <h3 class="mb-4">Verify your email address</h3>
+          <p>{% blocktrans %}We have sent an activation link to the email provided.{% endblocktrans %}</p>
+          <br />
+          <p>{% blocktrans %}Click the link in the email to activate your account.{% endblocktrans %}</p>
+
+          <span class="mb-0 text-muted">
+                        {% if msg %}
+                          {{ msg | safe }}
+                        {% else %}
+
+                        {% endif %}
+                    </span>
+
+          <br />
+          <br />
+          <br />
+
+          <p class="mb-2 text-muted">
+            &copy; MyProject
+            - <a target="_blank" href="#">My Site</a>.
+          </p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <p>{% blocktrans %}We have sent an e-mail to you for verification. Follow the link provided to finalize the signup process. Please contact us if you do not receive it within a few minutes.{% endblocktrans %}</p>
+
+{% endblock %}
+

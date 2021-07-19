@@ -1,0 +1,110 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} DataTable {% endblock %}
+
+{% block stylesheets %}
+
+  <!-- data tables css -->
+  <link rel="stylesheet" href="/static/assets/plugins/data-tables/css/datatables.min.css">
+
+{% endblock stylesheets %}
+
+{% block content %}
+
+  <!-- [ Main Content ] start -->
+  <section class="pcoded-main-container">
+    <div class="pcoded-wrapper">
+      <div class="pcoded-content">
+        <div class="pcoded-inner-content">
+          <!-- [ breadcrumb ] start -->
+          <div class="page-header">
+            <div class="page-block">
+              <div class="row align-items-center">
+                <div class="col-md-12">
+                  <div class="page-header-title">
+                  </div>
+                  <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{% url 'home' %}"><i class="feather icon-home"></i></a></li>
+                    <li class="breadcrumb-item">Invoice Table</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- [ breadcrumb ] end -->
+          <div class="main-body">
+            <div class="page-wrapper">
+              <!-- [ Main Content ] start -->
+              <div class="row">
+
+
+                <!-- [ Responsive table ] start -->
+                <div class="col-sm-12">
+                  <div class="card">
+                    <div class="card-header">
+                      <h5>Invoices</h5>
+                       <a href="{% url 'invoices:invoice_create' %}">
+                        <button type="button" class="btn btn-primary shadow-2 mb-4" title="Add new invoice" data-toggle="tooltip" style="float: right;">Add invoice</button>
+                      </a>
+                    </div>
+                    <div class="card-block">
+                      <h6>Basic Responsive</h6>
+                      <hr>
+                      <div class="table-responsive">
+                        <table id="responsive-table" class="display table dt-responsive nowrap" style="width:100%">
+                          <thead>
+                          <tr>
+                            <th>Invoice ID</th>
+                            <th>Customer</th>
+                            <th>Valid</th>
+                            <th>Created_on</th>
+                            <th>Expires on</th>
+                            <th>Status</th>
+                            <th>Number of items</th>
+                            <th>Total</th>
+                            <th>E-mail</th>
+                          </tr>
+                          </thead>
+                          <tbody>
+                          {% for invoice in invoice_list %}
+                            <tr>
+                              <td><a href="{{ invoice.get_absolute_url }}">{{ invoice.id }}</a></td>
+                              <td>{{ invoice.customer.name }}</td>
+                              <td>{{ invoice.valid }}</td>
+                              <td>{{ invoice.created_on }}</td>
+                              <td>{{ invoice.expiration_date }}</td>
+                              <td>{{ invoice.status}}</td>
+                              <td>TODO</td>
+                              <td>$ {{ invoice.total }}</td>
+                              <td>t.nixon@datatables.net</td>
+                            </tr>
+                          {% endfor %}
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- [ Responsive table ] end -->
+
+
+
+              </div>
+              <!-- [ Main Content ] end -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- [ Main Content ] end -->
+
+{% endblock content %}
+
+{% block javascripts %}
+
+  <!-- datatable Js -->
+  <script src="/static/assets/plugins/data-tables/js/datatables.min.js"></script>
+  <script src="/static/assets/js/pages/tbl-datatable-custom.js"></script>
+
+{% endblock javascripts %}

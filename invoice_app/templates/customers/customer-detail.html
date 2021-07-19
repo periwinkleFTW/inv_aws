@@ -1,0 +1,161 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Customer list {% endblock %}
+
+{% block stylesheets %}
+
+  <!-- Specific CSS goes HERE -->
+
+{% endblock stylesheets %}
+
+{% block content %}
+
+  <!-- [ Main Content ] start -->
+  <div class="pcoded-main-container">
+    <div class="pcoded-wrapper">
+      <div class="pcoded-content">
+        <div class="pcoded-inner-content">
+          <!-- [ breadcrumb ] start -->
+          <div class="page-header">
+            <div class="page-block">
+              <div class="row align-items-center">
+                <div class="col-md-12">
+                  <div class="page-header-title">
+                  </div>
+                  <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{% url 'home' %}"><i class="feather icon-home"></i></a></li>
+                    <li class="breadcrumb-item"><a href="{% url 'customers:customer_list' %}">Customers</a></li>
+                    <li class="breadcrumb-item">Customer details</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- [ breadcrumb ] end -->
+          <div class="main-body">
+            <div class="page-wrapper">
+              <!-- [ Main Content ] start -->
+              <div class="row">
+                <!-- [ sample-page ] start -->
+
+                <div class="col-sm-12">
+                  <div class="card">
+                    <div class="card-header">
+                      <h4>Customer detail</h4>
+                      <div class="card-header-right">
+                        <div class="btn-group card-option">
+                          <button type="button" class="btn dropdown-toggle btn-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="feather icon-more-horizontal"></i>
+                          </button>
+                          <ul class="list-unstyled card-option dropdown-menu dropdown-menu-right">
+                            <li class="dropdown-item full-card"><a href="#!"><span><i class="feather icon-maximize"></i> maximize</span><span style="display:none"><i class="feather icon-minimize"></i> Restore</span></a></li>
+                            <li class="dropdown-item minimize-card"><a href="#!"><span><i class="feather icon-minus"></i> collapse</span><span style="display:none"><i class="feather icon-plus"></i> expand</span></a></li>
+                            <li class="dropdown-item reload-card"><a href="#!"><i class="feather icon-refresh-cw"></i> reload</a></li>
+                            <li class="dropdown-item close-card"><a href="#!"><i class="feather icon-trash"></i> remove</a></li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="card-block">
+                      <a href="{% url 'customers:customer_update' customer.slug %}">
+                        <button type="button" class="btn btn-primary shadow-2 mb-4" title="Edit customer" data-toggle="tooltip" style="float: right;">Edit customer</button>
+                      </a>
+                         <a href="{% url 'customers:customer_delete' customer.slug %}">
+                        <button type="button" class="btn btn-danger shadow-2 mb-4" title="Delete customer" data-toggle="tooltip" style="float: right;">Delete customer</button>
+                      </a>
+                      <div class="row">
+                        <div class="col-md-6">
+                          <h5 class="mt-5">Contact info</h5>
+                          <hr>
+                          <div>
+                            <p>Name: {{ customer.name }}</p>
+                            <p>Phone: {{ customer.phone }}</p>
+                            <p>Email: {{ customer.email }}</p>
+                            <p>Company name: {{ customer.company_name }}</p>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div>
+                            <h5 class="mt-5">Address</h5>
+                            <hr>
+                            <p>Address: {{ customer.address }}</p>
+                            <p>City: {{ customer.city }}</p>
+                            <p>Province: {{ customer.region }}</p>
+                            <p>Country: {{ customer.country }}</p>
+                            <p>Postal code: {{ customer.postal_code }}</p>
+                          </div>
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+
+                  <div class="row">
+                    <!-- [ Responsive table ] start -->
+                    <div class="col-sm-12">
+                      <div class="card">
+                        <div class="card-header">
+                          <h5>Invoices for this customer</h5>
+                          <a href="{% url 'invoices:invoice_create' %}">
+                            <button type="button" class="btn btn-primary shadow-2 mb-4" title="Add new customer" data-toggle="tooltip" style="float: right;">Add invoice</button>
+                          </a>
+                        </div>
+                        <div class="card-block">
+                          <div class="table-responsive">
+                            <table id="responsive-table" class="display table dt-responsive nowrap" style="width:100%">
+                              <thead>
+                              <tr>
+                                <th>Invoice ID</th>
+                                <th>Customer</th>
+                                <th>Valid</th>
+                                <th>Created_on</th>
+                                <th>Expires on</th>
+                                <th>Status</th>
+                                <th>Number of items</th>
+                                <th>Total</th>
+                                <th>E-mail</th>
+                              </tr>
+                              </thead>
+                              <tbody>
+                              {% for invoice in invoice_list %}
+                                <tr>
+                                  <td><a href="{{ invoice.get_absolute_url }}">{{ invoice.id }}</a></td>
+                                  <td>{{ invoice.customer.name }}</td>
+                                  <td>{{ invoice.valid }}</td>
+                                  <td>{{ invoice.created_on }}</td>
+                                  <td>{{ invoice.expiration_date }}</td>
+                                  <td>{{ invoice.status}}</td>
+                                  <td>TODO</td>
+                                  <td>$ {{ invoice.total }}</td>
+                                  <td>t.nixon@datatables.net</td>
+                                </tr>
+                              {% endfor %}
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+
+                  <!-- [ sample-page ] end -->
+                </div>
+                <!-- [ Main Content ] end -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- [ Main Content ] end -->
+
+{% endblock content %}
+
+{% block javascripts %}
+
+  <!-- Specific Page JS goes HERE  -->
+
+{% endblock javascripts %}

@@ -1,0 +1,58 @@
+{% extends "layouts/base-fullscreen.html" %}
+
+{% load i18n %}
+{% load account %}
+
+{% block head_title %}{% trans "Confirm E-mail Address" %}{% endblock %}
+
+
+{% block content %}
+  <div class="auth-wrapper">
+    <div class="auth-content">
+      <div class="auth-bg">
+        <span class="r"></span>
+        <span class="r s"></span>
+        <span class="r s"></span>
+        <span class="r"></span>
+      </div>
+      <div class="card">
+        <div class="card-body text-center">
+          <div class="mb-4">
+            <i class="feather icon-user-plus auth-icon"></i>
+          </div>
+          <h3 class="mb-4">Verify your email address</h3>
+          <br />
+
+          {% if confirmation %}
+
+            {% user_display confirmation.email_address.user as user_display %}
+
+            <p>{% blocktrans with confirmation.email_address.email as email %}Please confirm that <a href="mailto:{{ email }}">{{ email }}</a> is an e-mail address for user {{ user_display }}.{% endblocktrans %}</p>
+
+            <form method="post" action="{% url 'account_confirm_email' confirmation.key %}">
+              {% csrf_token %}
+              <button class="btn btn-primary shadow-2 mb-4" type="submit">{% trans 'Confirm' %}</button>
+            </form>
+
+          {% else %}
+
+            {% url 'account_email' as email_url %}
+
+            <p>{% blocktrans %}This e-mail confirmation link expired or is invalid. Please <a href="{{ email_url }}">issue a new e-mail confirmation request</a>.{% endblocktrans %}</p>
+
+          {% endif %}
+          <br />
+          <br />
+
+
+          <p class="mb-2 text-muted">
+            &copy; MyProject
+            - <a target="_blank" href="#">My Site</a>.
+          </p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+

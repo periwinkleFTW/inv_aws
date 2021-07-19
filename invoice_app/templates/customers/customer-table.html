@@ -1,0 +1,107 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} DataTable {% endblock %}
+
+{% block stylesheets %}
+
+  <!-- data tables css -->
+  <link rel="stylesheet" href="/static/assets/plugins/data-tables/css/datatables.min.css">
+
+{% endblock stylesheets %}
+
+{% block content %}
+
+  <!-- [ Main Content ] start -->
+  <section class="pcoded-main-container">
+    <div class="pcoded-wrapper">
+      <div class="pcoded-content">
+        <div class="pcoded-inner-content">
+          <!-- [ breadcrumb ] start -->
+          <div class="page-header">
+            <div class="page-block">
+              <div class="row align-items-center">
+                <div class="col-md-12">
+                  <div class="page-header-title">
+                  </div>
+                  <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{% url 'home' %}"><i class="feather icon-home"></i></a></li>
+                    <li class="breadcrumb-item"><a href="{% url 'customers:customer_list' %}">Customers</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- [ breadcrumb ] end -->
+          <div class="main-body">
+            <div class="page-wrapper">
+              <!-- [ Main Content ] start -->
+              <div class="row">
+
+
+                <!-- [ Responsive table ] start -->
+                <div class="col-sm-12">
+                  <div class="card">
+                    <div class="card-header">
+                      <h5>Customers</h5>
+                      <a href="{% url 'customers:customer_create' %}">
+                        <button type="button" class="btn btn-primary shadow-2 mb-4" title="Add new customer" data-toggle="tooltip" style="float: right;">Add customer</button>
+                      </a>
+                    </div>
+                    <div class="card-block">
+                      <h6>Basic Responsive</h6>
+
+                      <hr>
+                      <div class="table-responsive">
+                        <table id="responsive-table" class="display table dt-responsive nowrap" style="width:100%">
+                          <thead>
+                          <tr>
+                            <th>Customer ID</th>
+                            <th>Created by</th>
+                            <th>Name</th>
+                            <th>Phone</th>
+                            <th>Email</th>
+                            <th>Company</th>
+                            <th>Address</th>
+                            <th>City</th>
+                          </tr>
+                          </thead>
+                          <tbody>
+                          {% for customer in customer_list %}
+                            <tr>
+                              <td><a href="{{ customer.get_absolute_url }}">{{ customer.id }}</a></td>
+                              <td>{{ customer.created_by }}</td>
+                              <td>{{ customer.name }}</td>
+                              <td>{{ customer.phone }}</td>
+                              <td>{{ customer.email }}</td>
+                              <td>{{ customer.company_name }}</td>
+                              <td>{{ customer.address}}</td>
+                              <td>{{ customer.city }}</td>
+                            </tr>
+                          {% endfor %}
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- [ Responsive table ] end -->
+
+              </div>
+              <!-- [ Main Content ] end -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- [ Main Content ] end -->
+
+{% endblock content %}
+
+{% block javascripts %}
+
+  <!-- datatable Js -->
+  <script src="/static/assets/plugins/data-tables/js/datatables.min.js"></script>
+  <script src="/static/assets/js/pages/tbl-datatable-custom.js"></script>
+
+{% endblock javascripts %}
